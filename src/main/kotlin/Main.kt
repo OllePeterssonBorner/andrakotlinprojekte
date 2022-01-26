@@ -24,15 +24,19 @@ fun main(args: Array<String>) {
 
     println("[2] Visa kontakter")
 
+    println("[3] " +"Sortera kontakter alfabetiskt")
 
 
 
 
-        val wrote = readLine()
 
-        if (wrote == "1")
-        {
+        var wrote = readLine()!!.toInt()
 
+        when (wrote){
+
+
+
+            1 -> {
             println("Förnamn:")
             var forename = readLine().toString()
 
@@ -46,72 +50,81 @@ fun main(args: Array<String>) {
             val email = readLine().toString()
 
             contactHandler.Add(surname, forename, phonynumber,email)
+            }
 
-
-        }
-        else if(wrote == "2")
-        {
-
+            2 -> {
             var qount = 1
             for (c in contactHandler.contactlist)
             {
 
                 println(qount)
-                println("Förnamn:" + c.forename)
-                println("Efternamn:" + c.surname)
+                println(c.forename + c.surname)
+
 
 
                 qount++
 
             }
             var written = readLine()!!.toInt()
-                written -= 1
+            written -= 1
 
 
 
-                println("[1] " +"Förnamn:" + contactHandler.contactlist[written].forename)
-                println("[2] " +"Efternamn:" + contactHandler.contactlist[written].surname)
-                println("[3] " +"Telefonnummer:" + contactHandler.contactlist[written].phonynumber)
-                println("[4] " +"E-mail:" + contactHandler.contactlist[written].email)
-                println("[5] " +"Ta bort kontakt")
+            println("[1] " +"Förnamn:" + contactHandler.contactlist[written].forename)
+            println("[2] " +"Efternamn:" + contactHandler.contactlist[written].surname)
+            println("[3] " +"Telefonnummer:" + contactHandler.contactlist[written].phonynumber)
+            println("[4] " +"E-mail:" + contactHandler.contactlist[written].email)
+            println("[5] " +"Ta bort kontakt")
 
 
 
-                var wroteineni = readLine()!!.toInt()
 
-                if (wroteineni == 1)
-                {
-                    println("Förnamn:"+ contactHandler.contactlist[written].forename)
+            var wroteineni = readLine()!!.toInt()
+
+            when (wroteineni) {
+
+
+                1 -> {
+                    println("Förnamn:" + contactHandler.contactlist[written].forename)
                     contactHandler.contactlist[written].forename = readLine().toString()
                 }
-                else if (wroteineni == 2)
-                {
-                    println("Efternamn:"+ contactHandler.contactlist[written].surname)
+
+                2 -> {
+                    println("Efternamn:" + contactHandler.contactlist[written].surname)
                     contactHandler.contactlist[written].surname = readLine().toString()
                 }
-                else if (wroteineni == 3)
-                {
-                    println("Telefonnummer:"+ contactHandler.contactlist[written].phonynumber)
+
+                3 -> {
+                    println("Telefonnummer:" + contactHandler.contactlist[written].phonynumber)
                     contactHandler.contactlist[written].phonynumber = readLine().toString()
                 }
-                else if (wroteineni == 4)
-                {
-                    println("E-mail:"+ contactHandler.contactlist[written].email)
+
+                4 -> {
+                    println("E-mail:" + contactHandler.contactlist[written].email)
                     contactHandler.contactlist[written].email = readLine().toString()
                 }
-                else if (wroteineni == 5)
-                {
+
+                5 -> {
                     contactHandler.contactlist.removeAt(written)
 
                     var tempförnamn = contactHandler.contactlist[written].forename
-                    var tempefternamn =   contactHandler.contactlist[written].surname
+                    var tempefternamn = contactHandler.contactlist[written].surname
 
-                    println("Kontakten" + tempförnamn + tempefternamn +"togs bort")
+                    println("Kontakten" + tempförnamn + tempefternamn + "togs bort")
                     readLine()
                 }
 
 
+                }
+
+            }
+            3 ->{
+                contactHandler.contactlist.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER){it.forename})
+                println("Listan har sorterats alfabetiskt")
+                readLine()
+            }
         }
+
     }
 
 
