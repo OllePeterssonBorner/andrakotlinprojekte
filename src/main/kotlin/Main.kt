@@ -1,3 +1,5 @@
+import java.io.File
+
 class Contact(var surname: String, var forename: String, var phonynumber: String, var email: String)
 
 class ContactHandler{
@@ -11,6 +13,9 @@ class ContactHandler{
 
 
     }
+}
+fun textwriter(forename, surname, phonynumber, email){
+    File(contacthandlerdoc.txt).writeText(forename+"*" +surname+"*"+phonynumber+"*"+email)
 }
 
 fun main(args: Array<String>) {
